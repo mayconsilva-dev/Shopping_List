@@ -1,9 +1,14 @@
 import { Box, Center, Image, Text, VStack } from "@gluestack-ui/themed";
-import BackgroundImg from "../assets/background.png"
+import BackgroundImg from "../assets/background.png";
+import { InputItem } from "../components/Item";
+import { Amount } from "../components/Amount";
 
 export function Dashboard(){
     return(
-        <VStack flex={1} bg="$gray600">
+        <VStack 
+          flex={1} 
+          bg="$gray600"
+        >
 
           <Box 
             position="relative" 
@@ -16,12 +21,15 @@ export function Dashboard(){
               w="$full"
               h="$56"
               position="absolute"
+              zIndex={0}
             />
           
             <Center 
               w="$full" 
               h="$56"
               pr="$40"
+              position="absolute"
+              zIndex={1}
             >
               <Text
                 fontFamily="$heading"
@@ -31,7 +39,12 @@ export function Dashboard(){
                  Lista de Compras
               </Text>
             </Center>
+
+            <Box position="absolute" bottom="-$5" zIndex={2}>
+              <InputItem />
+            </Box>
           </Box>
+          <Amount />
         </VStack>
     )
 }
