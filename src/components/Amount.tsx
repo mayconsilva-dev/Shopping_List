@@ -1,16 +1,17 @@
-import { HStack, Input, InputField, Text, VStack } from "@gluestack-ui/themed";
+import { useState } from 'react';
+import { Box, HStack, Input, InputField,  Text, VStack } from "@gluestack-ui/themed";
 import {
-  Select,
-  SelectTrigger,
-  SelectInput,
-  SelectIcon,
-  SelectPortal,
-  SelectContent,
-  SelectItem
+  Menu,
+  MenuItem,
+  Button,
+  ChevronDownIcon,
 } from "@gluestack-ui/themed";
-import { ChevronDownIcon } from "@gluestack-ui/themed"
+
 
 export function Amount(){
+  const [selected, setSelected] = useState("UN.");
+
+
     return(
         <VStack 
           pl="$12"
@@ -45,29 +46,20 @@ export function Amount(){
                   />
               </Input>
 
-              <Select>
-                <SelectTrigger 
-                  variant="outline" 
-                  w="$16" 
-                  borderColor="$gray300"
-                  borderTopLeftRadius="$nome"
-                  borderBottomLeftRadius="$nome"
-                  borderTopRightRadius="$md"
-                  borderBottomRightRadius="$md"
-                >
-                    <SelectInput placeholder="UN."/>
-                    <SelectIcon as={ChevronDownIcon} mr="$2"/>
-                </SelectTrigger>
+              <Menu
+                onSelectionChange={(value) => setSelected(value as string)}
+                trigger={(triggerProps) => (
+                  <Button {...triggerProps} endIcon={<ChevronDownIcon />}>
+                    <Text>{selected}</Text>
+                  </Button>
+                )}
+              >
+                <MenuItem textValue="UN."><Text>UN.</Text></MenuItem>
+                <MenuItem textValue="KG."><Text>KG.</Text></MenuItem>
+                <MenuItem textValue="ML."><Text>ML.</Text></MenuItem>
+                <MenuItem textValue="L."><Text>L.</Text></MenuItem>
+              </Menu>
 
-                <SelectPortal>
-                    <SelectContent>
-                        <SelectItem label="UN." value="unidade"/>
-                        <SelectItem label="KG" value="kg"/>
-                        <SelectItem label="ML" value="ml"/>
-                        <SelectItem label="L" value="litros"/>
-                    </SelectContent>
-                </SelectPortal>
-              </Select>
             </HStack>
         </VStack>
     )
